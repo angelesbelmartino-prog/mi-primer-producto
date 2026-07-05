@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ruta de Vocabulario</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap');
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Baloo 2', sans-serif;
+  color: #3A2E28;
+}
+button, select, input { font-family: inherit; }
+button { background: none; border: none; cursor: pointer; }
+
+/* Layout */
+.flex { display: flex; }
+.grid { display: grid; }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.flex-1 { flex: 1 1 0%; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.block { display: block; }
+.w-full { width: 100%; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.min-h-screen { min-height: 100vh; }
+.min-h-card { min-height: 140px; }
+.max-w-md { max-width: 28rem; }
+.max-w-sm { max-width: 24rem; }
+.max-h-52 { max-height: 13rem; }
+.overflow-hidden { overflow: hidden; }
+.overflow-x-hidden { overflow-x: hidden; }
+.overflow-y-auto { overflow-y: auto; }
+
+/* Sizes */
+.w-9 { width: 2.25rem; } .h-9 { height: 2.25rem; }
+.w-11 { width: 2.75rem; } .h-11 { height: 2.75rem; }
+.h-hairline { height: 3px; }
+
+/* Spacing */
+.p-4 { padding: 1rem; } .p-5 { padding: 1.25rem; } .p-6 { padding: 1.5rem; } .p-8 { padding: 2rem; }
+.px-1 { padding-left: .25rem; padding-right: .25rem; }
+.px-3 { padding-left: .75rem; padding-right: .75rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
+.py-1\.5 { padding-top: .375rem; padding-bottom: .375rem; }
+.py-2 { padding-top: .5rem; padding-bottom: .5rem; }
+.py-2\.5 { padding-top: .625rem; padding-bottom: .625rem; }
+.py-3 { padding-top: .75rem; padding-bottom: .75rem; }
+.py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.pr-1 { padding-right: .25rem; }
+.mb-1 { margin-bottom: .25rem; } .mb-1\.5 { margin-bottom: .375rem; }
+.mb-2 { margin-bottom: .5rem; } .mb-3 { margin-bottom: .75rem; }
+.mb-4 { margin-bottom: 1rem; } .mb-5 { margin-bottom: 1.25rem; }
+.mt-1 { margin-top: .25rem; } .mt-4 { margin-top: 1rem; }
+.-mt-1 { margin-top: -.25rem; } .-mt-4 { margin-top: -1rem; }
+.gap-1 { gap: .25rem; } .gap-1\.5 { gap: .375rem; }
+.gap-2 { gap: .5rem; } .gap-3 { gap: .75rem; } .gap-4 { gap: 1rem; }
+.space-y-2 > * + * { margin-top: .5rem; }
+.space-y-5 > * + * { margin-top: 1.25rem; }
+
+/* Typography */
+.text-tiny { font-size: 11px; line-height: 1.3; }
+.text-xs { font-size: .75rem; line-height: 1.2; }
+.text-sm { font-size: .875rem; line-height: 1.35; }
+.text-base { font-size: 1rem; line-height: 1.4; }
+.text-lg { font-size: 1.125rem; line-height: 1.4; }
+.text-xl { font-size: 1.25rem; line-height: 1.35; }
+.text-2xl { font-size: 1.5rem; line-height: 1.3; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.italic { font-style: italic; }
+.uppercase { text-transform: uppercase; }
+.underline { text-decoration: underline; }
+.tracking-wide { letter-spacing: 0.025em; }
+.leading-tight { line-height: 1.2; }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+
+/* Borders / radius / shadow */
+.rounded-xl { border-radius: .75rem; }
+.rounded-2xl { border-radius: 1rem; }
+.rounded-3xl { border-radius: 1.5rem; }
+.rounded-full { border-radius: 9999px; }
+.border { border: 1px solid #e7e7e7; }
+.border-2 { border: 2px solid transparent; }
+.border-soft { border-color: #F0E2D2; }
+.shadow-sm { box-shadow: 0 1px 3px rgba(58,46,40,0.06); }
+.shadow-md { box-shadow: 0 4px 10px rgba(58,46,40,0.10); }
+.shadow-lg { box-shadow: 0 8px 20px rgba(58,46,40,0.12); }
+
+/* Interaction / misc */
+.cursor-pointer { cursor: pointer; }
+.outline-none { outline: none; }
+.appearance-none { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+.transition-all { transition: all 0.2s ease; }
+.transition-transform { transition: transform 0.2s ease; }
+.duration-300 { transition-duration: 300ms; }
+.press-scale:active { transform: scale(0.98); }
+
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.animate-spin { animation: spin 1s linear infinite; }
+
+/* Selects styled like the rest of the inputs */
+select.appearance-none {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237A6A5E' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-right: 2.2rem;
+}
+
+button:disabled { cursor: default; }
+
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+
+<script type="text/babel" data-presets="react">
+/* ------------------------------------------------------------------ */
+/* Compatibilidad con React (sin import/export, versión UMD)           */
+/* ------------------------------------------------------------------ */
+const { useState, useEffect, useRef } = React;
+
+/* ------------------------------------------------------------------ */
+/* Almacenamiento persistente vía localStorage (versión standalone)    */
+/* Misma forma que window.storage de Claude, para no tocar la lógica   */
+/* de la app: get() resuelve {key,value,shared} o lanza si no existe.  */
+/* ------------------------------------------------------------------ */
+window.storage = {
+  get: async (key) => {
+    const raw = window.localStorage.getItem("rutavocabulario:" + key);
+    if (raw === null) throw new Error("not found");
+    return { key, value: raw, shared: false };
+  },
+  set: async (key, value) => {
+    window.localStorage.setItem("rutavocabulario:" + key, value);
+    return { key, value, shared: false };
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/* Iconos propios en SVG (sin dependencia de lucide-react)             */
+/* ------------------------------------------------------------------ */
+function makeIcon(children) {
+  return function Icon({ size = 24, color = "currentColor", strokeWidth = 2, fill = "none", className = "", style = {} }) {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill={fill}
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        style={{ display: "inline-block", flexShrink: 0, ...style }}
+      >
+        {children}
+      </svg>
+    );
+  };
+}
+
+const Check = makeIcon(<polyline points="20 6 9 17 4 12" />);
+const X = makeIcon(<><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></>);
+const ChevronRight = makeIcon(<polyline points="9 18 15 12 9 6" />);
+const RefreshCw = makeIcon(<><path d="M23 4v6h-6" /><path d="M1 20v-6h6" /><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10" /><path d="M1 14l4.64 4.36A9 9 0 0 0 20.49 15" /></>);
+const RotateCcw = makeIcon(<><path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" /></>);
+const Compass = makeIcon(<><circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" /></>);
+const Trophy = makeIcon(<><path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M17 5h2.5a1 1 0 0 1 1 1.2A4 4 0 0 1 17 9" /><path d="M7 5H4.5a1 1 0 0 0-1 1.2A4 4 0 0 0 7 9" /></>);
+const Flame = makeIcon(<path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c2 1 3 3 3 5a7 7 0 1 1-14 0c0-4 3-6 3-9 1 1 1.5 2 1.5 2S11 4 12 2z" />);
+const Zap = makeIcon(<polygon points="13 2 3 14 11 14 10 22 21 10 13 10 13 2" />);
+const Award = makeIcon(<><circle cx="12" cy="8" r="6" /><path d="M9 13.5 7 22l5-3 5 3-2-8.5" /></>);
+const Gamepad2 = makeIcon(<><rect x="2" y="6" width="20" height="12" rx="3" /><line x1="6" y1="12" x2="10" y2="12" /><line x1="8" y1="10" x2="8" y2="14" /><circle cx="15" cy="13" r="1" /><circle cx="18" cy="10.5" r="1" /></>);
+const Settings2 = makeIcon(<><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" /></>);
+const Loader2 = makeIcon(<><line x1="12" y1="2" x2="12" y2="6" /><line x1="16.24" y1="7.76" x2="19.07" y2="4.93" /><line x1="18" y1="12" x2="22" y2="12" /><line x1="16.24" y1="16.24" x2="19.07" y2="19.07" /><line x1="12" y1="18" x2="12" y2="22" /><line x1="4.93" y1="19.07" x2="7.76" y2="16.24" /><line x1="2" y1="12" x2="6" y2="12" /><line x1="4.93" y1="4.93" x2="7.76" y2="7.76" /></>);
+
+
+/* ------------------------------------------------------------------ */
+/* Tokens                                                              */
+/* ------------------------------------------------------------------ */
+const COLORS = {
+  amber: "#E8A33D",
+  amberLight: "#FFD98E",
+  amberDeep: "#C97E1E",
+  coral: "#F2665A",
+  coralLight: "#FFDCD5",
+  terracotta: "#B85C38",
+  terracottaLight: "#FBF1E7",
+  ink: "#3A2E28",
+  inkSoft: "#7A6A5E",
+  cream: "#FFFDF9",
+};
+
+const IDIOMAS = [
+  { v: "espanol", l: "Español" },
+  { v: "ingles", l: "Inglés" },
+  { v: "frances", l: "Francés" },
+  { v: "aleman", l: "Alemán" },
+  { v: "italiano", l: "Italiano" },
+];
+const NIVELES = [
+  { v: "basico", l: "Básico" },
+  { v: "intermedio", l: "Intermedio" },
+  { v: "avanzado", l: "Avanzado" },
+  { v: "nativo", l: "Nativo" },
+];
+const OBJETIVOS = [
+  { v: "viaje", l: "Viaje" },
+  { v: "negocios", l: "Negocios" },
+  { v: "entrevista", l: "Entrevista laboral" },
+  { v: "negociacion", l: "Negociación con proveedor" },
+];
+const NEEDS_PROFESION = new Set(["negocios", "entrevista", "negociacion"]);
+
+const STAGES = [
+  { key: "config", label: "Configurar", icon: Settings2 },
+  { key: "jugar", label: "Jugar", icon: Gamepad2 },
+  { key: "summary", label: "Resumen", icon: Trophy },
+];
+
+// Varios "step" internos (generating, practice, reviewPrompt, reviewPractice)
+// se agrupan visualmente bajo la misma etapa "Jugar", porque desde la
+// perspectiva del usuario son todos parte de la misma acción.
+function stepToStageKey(step) {
+  if (step === "config") return "config";
+  if (step === "summary") return "summary";
+  return "jugar";
+}
+
+const LOADING_MESSAGES = [
+  "Explorando el mapa de tu vocabulario…",
+  "Buscando las palabras más útiles…",
+  "Trazando tu ruta personalizada…",
+  "Preparando los desafíos del camino…",
+];
+
+/* ------------------------------------------------------------------ */
+/* Helpers                                                             */
+/* ------------------------------------------------------------------ */
+function buildSnakePoints(n, width = 100, rowHeight = 120, topPad = 60) {
+  const pts = [];
+  for (let i = 0; i < n; i++) {
+    const x = 50 + 34 * Math.sin(i * 1.05);
+    const y = topPad + i * rowHeight;
+    pts.push({ x, y });
+  }
+  return pts;
+}
+
+function smoothPath(points) {
+  if (points.length < 2) return "";
+  let d = `M ${points[0].x} ${points[0].y}`;
+  for (let i = 0; i < points.length - 1; i++) {
+    const a = points[i];
+    const b = points[i + 1];
+    const midY = (a.y + b.y) / 2;
+    d += ` C ${a.x} ${midY}, ${b.x} ${midY}, ${b.x} ${b.y}`;
+  }
+  return d;
+}
+
+function wordKey(idioma, palabra) {
+  return `${idioma}::${palabra}`.toLowerCase();
+}
+
+/* ------------------------------------------------------------------ */
+/* Stage trail (global progress, always visible)                       */
+/* ------------------------------------------------------------------ */
+function StageTrail({ step }) {
+  const currentIdx = STAGES.findIndex((s) => s.key === stepToStageKey(step));
+  return (
+    <div style={{ background: COLORS.cream }} className="rounded-3xl px-4 py-3 shadow-sm border border-soft mb-5">
+      <div className="flex items-center justify-between">
+        {STAGES.map((s, i) => {
+          const Icon = s.icon;
+          const done = i < currentIdx;
+          const active = i === currentIdx;
+          return (
+            <React.Fragment key={s.key}>
+              <div className="flex flex-col items-center gap-1 flex-1">
+                <div
+                  className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300"
+                  style={{
+                    background: done
+                      ? COLORS.amber
+                      : active
+                      ? COLORS.amberLight
+                      : "#F3E7D8",
+                    border: active ? `2px solid ${COLORS.amberDeep}` : "2px solid transparent",
+                    boxShadow: active ? `0 0 0 4px ${COLORS.amberLight}55` : "none",
+                  }}
+                >
+                  {done ? (
+                    <Check size={16} color={COLORS.cream} strokeWidth={3} />
+                  ) : (
+                    <Icon size={16} color={active ? COLORS.amberDeep : COLORS.inkSoft} strokeWidth={2.5} />
+                  )}
+                </div>
+                <span
+                  className="text-tiny font-semibold text-center leading-tight"
+                  style={{ color: active ? COLORS.amberDeep : done ? COLORS.ink : COLORS.inkSoft }}
+                >
+                  {s.label}
+                </span>
+              </div>
+              {i < STAGES.length - 1 && (
+                <div
+                  className="h-hairline flex-1 rounded-full -mt-4"
+                  style={{ background: i < currentIdx ? COLORS.amber : "#EFE1D0" }}
+                />
+              )}
+            </React.Fragment>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* HUD: streak + points                                                */
+/* ------------------------------------------------------------------ */
+function Hud({ streak, points }) {
+  return (
+    <div className="flex gap-3">
+      <div
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl font-bold text-sm"
+        style={{ background: streak > 0 ? COLORS.coralLight : "#F3E7D8", color: streak > 0 ? "#C23B2E" : COLORS.inkSoft }}
+      >
+        <Flame size={16} fill={streak > 0 ? "#F2665A" : "none"} />
+        {streak}
+      </div>
+      <div
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl font-bold text-sm"
+        style={{ background: COLORS.amberLight, color: COLORS.amberDeep }}
+      >
+        <Zap size={16} fill={COLORS.amberDeep} />
+        {points}
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Route map for the 8 cards                                           */
+/* ------------------------------------------------------------------ */
+function RouteMap({ cards, currentIndex, height }) {
+  const containerRef = useRef(null);
+  const points = buildSnakePoints(cards.length);
+  const pathD = smoothPath(points);
+  const totalHeight = points.length ? points[points.length - 1].y + 90 : 200;
+  const viewportHeight = height || 280;
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const target = currentIndex >= 0 && points[currentIndex] ? points[currentIndex].y : 0;
+    const scrollTop = Math.max(0, target - viewportHeight / 2);
+    containerRef.current.scrollTo({ top: scrollTop, behavior: "smooth" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentIndex, cards.length]);
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative w-full overflow-y-auto overflow-x-hidden"
+      style={{ height: viewportHeight, scrollBehavior: "smooth" }}
+    >
+      <div className="relative w-full" style={{ height: totalHeight }}>
+        <svg
+          viewBox={`0 0 100 ${totalHeight}`}
+          preserveAspectRatio="none"
+          width="100%"
+          height={totalHeight}
+          className="absolute inset-0"
+        >
+          <path d={pathD} fill="none" stroke="#EFDCC5" strokeWidth="3" strokeDasharray="1 6" strokeLinecap="round" />
+        </svg>
+        {points.map((p, i) => {
+        const card = cards[i];
+        const status = card?.status || "pending";
+        const isCurrent = i === currentIndex;
+        let bg = "#F3E7D8";
+        let ring = "transparent";
+        let content = <span className="font-extrabold text-sm" style={{ color: COLORS.inkSoft }}>{i + 1}</span>;
+
+        if (status === "mastered") {
+          bg = COLORS.amber;
+          content = <Award size={18} color={COLORS.cream} strokeWidth={2.5} />;
+        } else if (status === "review") {
+          bg = COLORS.coral;
+          content = <RotateCcw size={16} color={COLORS.cream} strokeWidth={2.5} />;
+        } else if (isCurrent) {
+          bg = COLORS.cream;
+          ring = COLORS.amberDeep;
+        }
+
+        return (
+          <div
+            key={i}
+            className="absolute flex flex-col items-center transition-all duration-300"
+            style={{
+              left: `${p.x}%`,
+              top: p.y,
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            <div
+              className="w-11 h-11 rounded-full flex items-center justify-center shadow-md transition-all duration-300"
+              style={{
+                background: bg,
+                border: isCurrent ? `3px solid ${ring}` : "3px solid #fff",
+                boxShadow: isCurrent ? `0 0 0 5px ${COLORS.amberLight}66` : "0 2px 6px rgba(58,46,40,0.12)",
+                transform: isCurrent ? "scale(1.15)" : "scale(1)",
+              }}
+            >
+              {content}
+            </div>
+          </div>
+        );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Flashcard + quiz                                                    */
+/* ------------------------------------------------------------------ */
+function PracticeCard({ card, onAnswer }) {
+  const [flipped, setFlipped] = useState(false);
+  const [selected, setSelected] = useState(null);
+  const [answered, setAnswered] = useState(false);
+  const isCorrect = answered && selected === card.correctaIndex;
+
+  useEffect(() => {
+    setFlipped(false);
+    setSelected(null);
+    setAnswered(false);
+  }, [card.id]);
+
+  const handleSelect = (idx) => {
+    if (answered) return;
+    setSelected(idx);
+    setAnswered(true);
+    const correct = idx === card.correctaIndex;
+    setTimeout(() => onAnswer(correct), 900);
+  };
+
+  return (
+    <div className="w-full max-w-sm mx-auto">
+      <div
+        className="rounded-3xl p-6 shadow-lg border border-soft min-h-card flex flex-col items-center justify-center text-center cursor-pointer transition-transform press-scale"
+        style={{ background: COLORS.cream }}
+        onClick={() => !flipped && setFlipped(true)}
+      >
+        {!flipped ? (
+          <>
+            <p className="text-2xl font-extrabold mb-2" style={{ color: COLORS.ink }}>
+              {card.palabra}
+            </p>
+            <p className="text-sm font-medium" style={{ color: COLORS.inkSoft }}>
+              Toca para voltear 👆
+            </p>
+          </>
+        ) : (
+          <>
+            <p className="text-2xl font-extrabold mb-2" style={{ color: COLORS.ink }}>
+              {card.palabra}
+            </p>
+            <p className="text-sm font-medium italic" style={{ color: answered ? (isCorrect ? COLORS.amberDeep : "#C23B2E") : COLORS.inkSoft }}>
+              {answered
+                ? isCorrect
+                  ? "¡Correcto! 🎉 Palabra dominada"
+                  : "No era esa 😅 Mira la correcta abajo"
+                : `“${card.ejemplo}”`}
+            </p>
+          </>
+        )}
+      </div>
+
+      {flipped && (
+        <div className="mt-4 space-y-2">
+          {!answered && (
+            <p className="text-xs font-bold uppercase tracking-wide mb-2" style={{ color: COLORS.inkSoft }}>
+              ¿Cuál es la traducción correcta?
+            </p>
+          )}
+          {card.opciones.map((op, idx) => {
+            let style = { background: COLORS.cream, borderColor: "#F0E2D2", color: COLORS.ink };
+            if (answered) {
+              if (idx === card.correctaIndex) {
+                style = { background: COLORS.amberLight, borderColor: COLORS.amber, color: COLORS.amberDeep };
+              } else if (idx === selected) {
+                style = { background: COLORS.coralLight, borderColor: COLORS.coral, color: "#C23B2E" };
+              }
+            }
+            return (
+              <button
+                key={idx}
+                onClick={() => handleSelect(idx)}
+                disabled={answered}
+                className="w-full text-left px-4 py-3 rounded-2xl border-2 font-semibold text-sm transition-all flex items-center justify-between"
+                style={style}
+              >
+                {op}
+                {answered && idx === card.correctaIndex && <Check size={16} strokeWidth={3} />}
+                {answered && idx === selected && idx !== card.correctaIndex && <X size={16} strokeWidth={3} />}
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Main App                                                             */
+/* ------------------------------------------------------------------ */
+function App() {
+  const [step, setStep] = useState("config");
+  const [form, setForm] = useState({ idioma: "ingles", nivel: "intermedio", objetivo: "viaje", profesion: "" });
+  const [cards, setCards] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [error, setError] = useState(null);
+  const [loadingMsgIdx, setLoadingMsgIdx] = useState(0);
+
+  const [stats, setStats] = useState({ streak: 0, totalPoints: 0, mastered: [], history: [] });
+  const [statsLoaded, setStatsLoaded] = useState(false);
+
+  // Cola de repaso: ids de las tarjetas falladas en la ronda, para el
+  // paso intermedio de reintento antes del resumen.
+  const [reviewQueue, setReviewQueue] = useState([]);
+  const [reviewPos, setReviewPos] = useState(0);
+
+  /* Load persisted progress */
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await window.storage.get("vocab-progress");
+        if (res && res.value) {
+          const data = JSON.parse(res.value);
+          setStats({
+            streak: data.streak || 0,
+            totalPoints: data.totalPoints || 0,
+            mastered: data.mastered || [],
+            history: data.history || [],
+          });
+        }
+      } catch (e) {
+        /* sin progreso previo, empezamos de cero */
+      }
+      setStatsLoaded(true);
+    })();
+  }, []);
+
+  // Auto-guardado: cada vez que `stats` cambia (por cualquier respuesta),
+  // se persiste completo. Evita depender de refs/closures que puedan
+  // quedar desactualizados y "pisar" el progreso con valores viejos.
+  useEffect(() => {
+    if (!statsLoaded) return;
+    (async () => {
+      try {
+        await window.storage.set("vocab-progress", JSON.stringify(stats));
+      } catch (e) {
+        /* si falla el guardado, seguimos en memoria sin bloquear la práctica */
+      }
+    })();
+  }, [stats, statsLoaded]);
+
+  /* Loading message rotation */
+  useEffect(() => {
+    if (step !== "generating") return;
+    const id = setInterval(() => {
+      setLoadingMsgIdx((i) => (i + 1) % LOADING_MESSAGES.length);
+    }, 1600);
+    return () => clearInterval(id);
+  }, [step]);
+
+  const showProfesion = NEEDS_PROFESION.has(form.objetivo);
+
+  const generateCards = async () => {
+    setStep("generating");
+    setError(null);
+    setLoadingMsgIdx(0);
+
+    const idiomaLabel = IDIOMAS.find((i) => i.v === form.idioma)?.l || form.idioma;
+    const nivelLabel = NIVELES.find((n) => n.v === form.nivel)?.l || form.nivel;
+    const objetivoLabel = OBJETIVOS.find((o) => o.v === form.objetivo)?.l || form.objetivo;
+
+    const contextoProfesion = showProfesion && form.profesion.trim()
+      ? ` Sector/rol: "${form.profesion.trim()}". Prioriza vocabulario específico de ese sector.`
+      : "";
+
+    // Claves cortas (p/t/e/o/c) para maximizar cuántas tarjetas caben en el
+    // presupuesto de tokens de salida y reducir el riesgo de truncado.
+    const prompt = `Genera exactamente 8 tarjetas de vocabulario para aprender ${idiomaLabel}, nivel ${nivelLabel}, objetivo "${objetivoLabel}".${contextoProfesion}
+Responde ÚNICAMENTE con un array JSON puro, sin markdown, sin backticks, sin explicaciones, sin texto antes ni después. Formato exacto y compacto:
+[{"p":"palabra o expresión en ${idiomaLabel}","t":"traducción al español","e":"ejemplo breve en ${idiomaLabel}, máx 8 palabras","o":["op1","op2","op3","op4"],"c":0}]
+"o" son 4 traducciones al español (1 correcta en la posición "c", 3 distractores plausibles del mismo campo semántico). Sé muy conciso, sin texto extra fuera del JSON.`;
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 25000);
+
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
+        body: JSON.stringify({ prompt }),
+      });
+      clearTimeout(timeoutId);
+
+      if (!response.ok) throw new Error("network");
+      const data = await response.json();
+      const text = (data.content || [])
+        .filter((b) => b.type === "text")
+        .map((b) => b.text)
+        .join("\n");
+
+      // Extraemos solo el bloque entre el primer '[' y el último ']' por si
+      // el modelo añade algún preámbulo pese a la instrucción.
+      const start = text.indexOf("[");
+      const end = text.lastIndexOf("]");
+      if (start === -1 || end === -1 || end < start) throw new Error("formato");
+      const clean = text.slice(start, end + 1).replace(/```json|```/g, "").trim();
+      const parsed = JSON.parse(clean);
+
+      if (!Array.isArray(parsed) || parsed.length === 0) throw new Error("formato");
+
+      const built = parsed.slice(0, 8).map((c, i) => ({
+        id: `${Date.now()}-${i}`,
+        palabra: c.p || c.palabra || "—",
+        traduccion: c.t || c.traduccion || "—",
+        ejemplo: c.e || c.ejemplo || "",
+        opciones: Array.isArray(c.o) && c.o.length === 4
+          ? c.o
+          : Array.isArray(c.opciones) && c.opciones.length === 4
+          ? c.opciones
+          : ["—", "—", "—", "—"],
+        correctaIndex: typeof c.c === "number" ? c.c : typeof c.correctaIndex === "number" ? c.correctaIndex : 0,
+        status: "pending",
+      }));
+
+      if (built.length < 4) throw new Error("formato");
+
+      setCards(built);
+      setCurrentIndex(0);
+      setReviewQueue([]);
+      setReviewPos(0);
+      setStep("practice");
+    } catch (e) {
+      clearTimeout(timeoutId);
+      const msg = e && e.name === "AbortError"
+        ? "La generación está tardando demasiado. Intenta de nuevo."
+        : "No pudimos trazar tu ruta. Puede que la respuesta no haya llegado en el formato esperado. Intenta de nuevo.";
+      setError(msg);
+      setStep("generating");
+    }
+  };
+
+  const finalizeRound = (finalCards) => {
+    const masteredCount = finalCards.filter((c) => c.status === "mastered").length;
+    const round = {
+      fecha: new Date().toISOString(),
+      idioma: IDIOMAS.find((i) => i.v === form.idioma)?.l,
+      nivel: NIVELES.find((n) => n.v === form.nivel)?.l,
+      objetivo: OBJETIVOS.find((o) => o.v === form.objetivo)?.l,
+      aciertos: masteredCount,
+      total: finalCards.length,
+    };
+    setStats((prev) => ({ ...prev, history: [round, ...prev.history].slice(0, 20) }));
+    setStep("summary");
+  };
+
+  const applyAnswerToStats = (correct, palabra) => {
+    setStats((prev) => {
+      const nextStreak = correct ? prev.streak + 1 : 0;
+      const nextPoints = correct ? prev.totalPoints + 10 : prev.totalPoints;
+      const key = wordKey(form.idioma, palabra);
+      const nextMastered = correct && !prev.mastered.includes(key) ? [...prev.mastered, key] : prev.mastered;
+      return { ...prev, streak: nextStreak, totalPoints: nextPoints, mastered: nextMastered };
+    });
+  };
+
+  const handleAnswer = (correct) => {
+    const updatedCards = cards.map((c, i) =>
+      i === currentIndex ? { ...c, status: correct ? "mastered" : "review" } : c
+    );
+    setCards(updatedCards);
+    applyAnswerToStats(correct, updatedCards[currentIndex].palabra);
+
+    const isLast = currentIndex === updatedCards.length - 1;
+    if (!isLast) {
+      setTimeout(() => setCurrentIndex((i) => i + 1), 300);
+      return;
+    }
+
+    setTimeout(() => {
+      const pendingReview = updatedCards.filter((c) => c.status === "review");
+      if (pendingReview.length > 0) {
+        setReviewQueue(pendingReview.map((c) => c.id));
+        setReviewPos(0);
+        setStep("reviewPrompt");
+      } else {
+        finalizeRound(updatedCards);
+      }
+    }, 300);
+  };
+
+  const handleReviewAnswer = (correct) => {
+    const cardId = reviewQueue[reviewPos];
+    const updatedCards = cards.map((c) => (c.id === cardId ? { ...c, status: correct ? "mastered" : "review" } : c));
+    setCards(updatedCards);
+    const answeredCard = updatedCards.find((c) => c.id === cardId);
+    applyAnswerToStats(correct, answeredCard.palabra);
+
+    const nextPos = reviewPos + 1;
+    setTimeout(() => {
+      if (nextPos < reviewQueue.length) {
+        setReviewPos(nextPos);
+      } else {
+        finalizeRound(updatedCards);
+      }
+    }, 300);
+  };
+
+  const startNewRound = (sameConfig) => {
+    setCards([]);
+    setCurrentIndex(0);
+    setReviewQueue([]);
+    setReviewPos(0);
+    setError(null);
+    if (sameConfig) {
+      generateCards();
+    } else {
+      setStep("config");
+    }
+  };
+
+  if (!statsLoaded) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ background: COLORS.terracottaLight }}>
+        <Loader2 className="animate-spin" size={28} color={COLORS.amberDeep} />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="min-h-screen w-full px-4 py-6"
+      style={{ background: COLORS.terracottaLight, fontFamily: "'Baloo 2', sans-serif", color: COLORS.ink }}
+    >
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap');
+        * { box-sizing: border-box; }
+      `}</style>
+
+      <div className="max-w-md mx-auto">
+        <div className="flex items-center gap-2 mb-4">
+          <Compass size={22} color={COLORS.terracotta} strokeWidth={2.5} />
+          <h1 className="text-xl font-extrabold" style={{ color: COLORS.terracotta }}>
+            Ruta de Vocabulario
+          </h1>
+        </div>
+
+        <StageTrail step={step} />
+
+        {/* ---------------- CONFIG ---------------- */}
+        {step === "config" && (
+          <div className="rounded-3xl p-5 shadow-sm border border-soft" style={{ background: COLORS.cream }}>
+            <p className="text-sm font-semibold mb-4" style={{ color: COLORS.inkSoft }}>
+              Elige tu ruta y arma tu mazo de 8 palabras 🎒
+            </p>
+
+            <Field label="Idioma destino">
+              <Select value={form.idioma} onChange={(v) => setForm({ ...form, idioma: v })} options={IDIOMAS} />
+            </Field>
+            <Field label="Nivel">
+              <Select value={form.nivel} onChange={(v) => setForm({ ...form, nivel: v })} options={NIVELES} />
+            </Field>
+            <Field label="Objetivo">
+              <Select value={form.objetivo} onChange={(v) => setForm({ ...form, objetivo: v })} options={OBJETIVOS} />
+            </Field>
+
+            {showProfesion && (
+              <Field label="Profesión o rol">
+                <input
+                  type="text"
+                  value={form.profesion}
+                  onChange={(e) => setForm({ ...form, profesion: e.target.value })}
+                  placeholder="ej. project management, ventas B2B…"
+                  className="w-full px-3 py-2.5 rounded-xl border-2 text-sm font-medium outline-none"
+                  style={{ borderColor: "#F0E2D2", color: COLORS.ink }}
+                />
+              </Field>
+            )}
+
+            <button
+              onClick={generateCards}
+              className="w-full mt-4 py-3 rounded-2xl font-extrabold text-sm flex items-center justify-center gap-2 transition-transform press-scale"
+              style={{ background: COLORS.amber, color: COLORS.cream }}
+            >
+              Iniciar ruta <ChevronRight size={18} strokeWidth={3} />
+            </button>
+          </div>
+        )}
+
+        {/* ---------------- GENERATING ---------------- */}
+        {step === "generating" && (
+          <div className="rounded-3xl p-8 shadow-sm border border-soft flex flex-col items-center text-center gap-4" style={{ background: COLORS.cream }}>
+            {!error ? (
+              <>
+                <Loader2 className="animate-spin" size={32} color={COLORS.amberDeep} />
+                <p className="font-bold text-sm" style={{ color: COLORS.ink }}>
+                  {LOADING_MESSAGES[loadingMsgIdx]}
+                </p>
+              </>
+            ) : (
+              <>
+                <X size={28} color={COLORS.coral} />
+                <p className="font-semibold text-sm" style={{ color: COLORS.ink }}>{error}</p>
+                <button
+                  onClick={generateCards}
+                  className="px-5 py-2.5 rounded-2xl font-bold text-sm flex items-center gap-2"
+                  style={{ background: COLORS.coral, color: COLORS.cream }}
+                >
+                  <RefreshCw size={15} /> Reintentar
+                </button>
+                <button
+                  onClick={() => { setError(null); setStep("config"); }}
+                  className="text-xs font-semibold underline"
+                  style={{ color: COLORS.inkSoft }}
+                >
+                  Cambiar configuración
+                </button>
+              </>
+            )}
+          </div>
+        )}
+
+        {/* ---------------- PRACTICE ---------------- */}
+        {step === "practice" && cards.length > 0 && (
+          <div>
+            <div className="flex items-center justify-between mb-3 px-1">
+              <p className="text-xs font-bold" style={{ color: COLORS.inkSoft }}>
+                Tarjeta {currentIndex + 1} de {cards.length}
+              </p>
+              <Hud streak={stats.streak} points={stats.totalPoints} />
+            </div>
+
+            <div className="rounded-3xl p-4 shadow-sm border border-soft mb-5 overflow-hidden" style={{ background: "#FFF9F1" }}>
+              <RouteMap cards={cards} currentIndex={currentIndex} height={280} />
+            </div>
+
+            <PracticeCard key={cards[currentIndex].id} card={cards[currentIndex]} onAnswer={handleAnswer} />
+          </div>
+        )}
+
+        {/* ---------------- REVIEW PROMPT ---------------- */}
+        {step === "reviewPrompt" && (
+          <div className="rounded-3xl p-6 shadow-sm border border-soft text-center" style={{ background: COLORS.cream }}>
+            <RotateCcw size={30} color={COLORS.coral} className="mx-auto mb-3" />
+            <p className="font-extrabold text-base mb-1" style={{ color: COLORS.ink }}>
+              Te quedaron {reviewQueue.length} palabra{reviewQueue.length === 1 ? "" : "s"} para repasar
+            </p>
+            <p className="text-sm font-medium mb-5" style={{ color: COLORS.inkSoft }}>
+              ¿Quieres intentarlas de nuevo antes de ver tu resumen?
+            </p>
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={() => setStep("reviewPractice")}
+                className="w-full py-3 rounded-2xl font-extrabold text-sm flex items-center justify-center gap-2"
+                style={{ background: COLORS.coral, color: COLORS.cream }}
+              >
+                <RotateCcw size={16} /> Repasar ahora
+              </button>
+              <button
+                onClick={() => finalizeRound(cards)}
+                className="w-full py-2.5 rounded-2xl font-bold text-sm"
+                style={{ color: COLORS.inkSoft }}
+              >
+                Ver resumen directamente
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* ---------------- REVIEW PRACTICE ---------------- */}
+        {step === "reviewPractice" && reviewQueue.length > 0 && (() => {
+          const reviewCard = cards.find((c) => c.id === reviewQueue[reviewPos]);
+          const mapCurrentIndex = cards.findIndex((c) => c.id === reviewQueue[reviewPos]);
+          if (!reviewCard) return null;
+          return (
+            <div>
+              <div className="flex items-center justify-between mb-3 px-1">
+                <p className="text-xs font-bold" style={{ color: COLORS.inkSoft }}>
+                  Repaso {reviewPos + 1} de {reviewQueue.length}
+                </p>
+                <Hud streak={stats.streak} points={stats.totalPoints} />
+              </div>
+
+              <div className="rounded-3xl p-4 shadow-sm border border-soft mb-5 overflow-hidden" style={{ background: "#FFF9F1" }}>
+                <RouteMap cards={cards} currentIndex={mapCurrentIndex} height={280} />
+              </div>
+
+              <PracticeCard key={reviewCard.id} card={reviewCard} onAnswer={handleReviewAnswer} />
+            </div>
+          );
+        })()}
+
+        {/* ---------------- SUMMARY ---------------- */}
+        {step === "summary" && (
+          <div className="space-y-5">
+            <div className="rounded-3xl p-5 shadow-sm border border-soft text-center" style={{ background: COLORS.cream }}>
+              <Trophy size={32} color={COLORS.amberDeep} className="mx-auto mb-2" />
+              <p className="font-extrabold text-lg" style={{ color: COLORS.ink }}>
+                ¡Ruta completada! 🎉
+              </p>
+              <p className="text-sm font-semibold mt-1" style={{ color: COLORS.inkSoft }}>
+                {cards.filter((c) => c.status === "mastered").length} de {cards.length} palabras dominadas en esta ronda
+              </p>
+            </div>
+
+            <div className="rounded-3xl p-4 shadow-sm border border-soft" style={{ background: "#FFF9F1" }}>
+              <RouteMap cards={cards} currentIndex={-1} height={280} />
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <StatCard icon={Flame} label="Racha actual" value={stats.streak} color={COLORS.coral} />
+              <StatCard icon={Zap} label="Puntos totales" value={stats.totalPoints} color={COLORS.amberDeep} />
+            </div>
+
+            <div className="space-y-2">
+              <button
+                onClick={() => startNewRound(true)}
+                className="w-full py-3 rounded-2xl font-extrabold text-sm"
+                style={{ background: COLORS.amber, color: COLORS.cream }}
+              >
+                🔁 Jugar otra ronda (mismo idioma y nivel)
+              </button>
+              <p className="text-tiny text-center font-medium -mt-1 mb-1" style={{ color: COLORS.inkSoft }}>
+                Generaremos 8 palabras nuevas con tu misma configuración
+              </p>
+              <button
+                onClick={() => startNewRound(false)}
+                className="w-full py-3 rounded-2xl font-extrabold text-sm border-2"
+                style={{ borderColor: COLORS.terracotta, color: COLORS.terracotta, background: COLORS.cream }}
+              >
+                ⚙️ Cambiar idioma, nivel u objetivo
+              </button>
+            </div>
+
+            {stats.history.length > 0 && (
+              <div className="rounded-3xl p-4 shadow-sm border border-soft" style={{ background: COLORS.cream }}>
+                <p className="text-xs font-extrabold uppercase tracking-wide mb-3" style={{ color: COLORS.inkSoft }}>
+                  Historial de rondas
+                </p>
+                <div className="space-y-2 max-h-52 overflow-y-auto pr-1">
+                  {stats.history.map((r, i) => (
+                    <div key={i} className="flex items-center justify-between text-xs font-semibold px-3 py-2 rounded-xl" style={{ background: "#FBF3EA" }}>
+                      <span style={{ color: COLORS.ink }}>
+                        {r.idioma} · {r.nivel} · {r.objetivo}
+                      </span>
+                      <span style={{ color: COLORS.amberDeep }}>{r.aciertos}/{r.total}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Small UI pieces                                                     */
+/* ------------------------------------------------------------------ */
+function Field({ label, children }) {
+  return (
+    <div className="mb-3">
+      <label className="block text-xs font-bold mb-1.5" style={{ color: COLORS.inkSoft }}>
+        {label}
+      </label>
+      {children}
+    </div>
+  );
+}
+
+function Select({ value, onChange, options }) {
+  return (
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="w-full px-3 py-2.5 rounded-xl border-2 text-sm font-semibold outline-none appearance-none"
+      style={{ borderColor: "#F0E2D2", color: COLORS.ink, background: COLORS.cream }}
+    >
+      {options.map((o) => (
+        <option key={o.v} value={o.v}>{o.l}</option>
+      ))}
+    </select>
+  );
+}
+
+function StatCard({ icon: Icon, label, value, color }) {
+  return (
+    <div className="rounded-2xl p-4 shadow-sm border border-soft flex flex-col items-center gap-1" style={{ background: COLORS.cream }}>
+      <Icon size={20} color={color} fill={color} />
+      <p className="text-xl font-extrabold" style={{ color: COLORS.ink }}>{value}</p>
+      <p className="text-tiny font-semibold" style={{ color: COLORS.inkSoft }}>{label}</p>
+    </div>
+  );
+}
+
+
+const rootEl = document.getElementById("root");
+ReactDOM.createRoot(rootEl).render(<App />);
+</script>
+</body>
+</html>
